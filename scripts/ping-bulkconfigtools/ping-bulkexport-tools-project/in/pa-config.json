@@ -1,0 +1,196 @@
+{
+  "sort-arrays":[
+        "pathPrefixes","supportedDestinations","pathPatterns","virtualHostIds"
+  ],
+  "search-replace":[
+    {
+      "search": "\"sso.asb-poc.pingapac.com:443\"",
+      "replace": "\"${ADR_SSO_ENDPOINT}\"",
+      "apply-env-file": false
+    },
+    {
+      "search": "\"sso.asb-poc.pingapac.com:6443\"",
+      "replace": "\"${ADR_SSO_ENDPOINT}\"",
+      "apply-env-file": false
+    },
+    {
+      "search": "\"api.asb-poc.pingapac.com:443\"",
+      "replace": "\"${ADR_API_ENDPOINT}\"",
+      "apply-env-file": false
+    },
+    {
+      "search": "\"api.asb-poc.pingapac.com:6443\"",
+      "replace": "\"${ADR_API_ENDPOINT}\"",
+      "apply-env-file": false
+    },
+    {
+      "search": "asb-poc.pingapac.com",
+      "replace": "${BASE_HOSTNAME}",
+      "apply-env-file": false
+    },
+    {
+      "search": "asb-poc.pingapac.com",
+      "replace": "${DR_BASE_HOSTNAME}",
+      "apply-env-file": false
+    },
+    {
+      "search": "pingdirectory:3443",
+      "replace": "pingdirectory:443",
+      "apply-env-file": false
+    },
+    {
+      "search": "\\\"6443\\\"",
+      "replace": "\\\"443\\\"",
+      "apply-env-file": false
+    }
+  ],
+  "change-value":[
+  	{
+  	  "parameter-name": "dataHolderIssuer",
+      "matching-identifier":
+          {
+          	"id-name": "dataHolderIssuer",
+          	"id-value": "(.*)sso\\.(.*)"
+          },
+  	  "new-value": "${ADH_ID}"
+  	},
+        {
+          "parameter-name": "dataHolderIssuer",
+      "matching-identifier":
+          {
+                "id-name": "dataHolderIssuer",
+                "id-value": "(.*)sso\\-2\\.(.*)"
+          },
+          "new-value": "${ADH2_ID}"
+        },
+  	{
+  	  "parameter-name": "keyPairId",
+      "matching-identifier":
+          {
+          	"id-name": "name",
+          	"id-value": "ENGINE"
+          },
+  	  "new-value": 8
+  	},
+  	{
+  	  "parameter-name": "keyPairId",
+      "matching-identifier":
+          {
+          	"id-name": "name",
+          	"id-value": "ADMIN"
+          },
+  	  "new-value": 5
+  	},
+        {
+          "parameter-name": "agentCacheInvalidatedExpiration",
+      "matching-identifier":
+          {
+                "id-name": "agentCacheInvalidatedExpiration",
+                "id-value": ".*"
+          },
+          "new-value": 1616709250468
+        },
+        {
+          "parameter-name": "lastModified",
+      "matching-identifier":
+          {
+                "id-name": "lastModified",
+                "id-value": ".*"
+          },
+          "new-value": 1616709250468
+        }
+  ],
+  "remove-config":[
+  	{
+  	  "key": "alias",
+	    "value": "ca-keypair-.*"
+  	},
+  	{
+  	  "key": "alias",
+	    "value": "siteauthenticator-keypair-.*"
+  	},
+  	{
+  	  "key": "name",
+	  "value": "HTTPS Engine Listener"
+  	},
+        {
+          "key": "name",
+          "value": "HTTP Engine Listener"
+        },
+  	{
+  	  "key": "name",
+	    "value": "CDR-SiteAuthenticator"
+  	},
+  	{
+  	  "key": "alias",
+	    "value": "cdr-register-local-.*"
+  	},
+  	{
+  	  "key": "alias",
+	    "value": "pingaccess-configlistener-keypair"
+  	},
+  	{
+  	  "key": "alias",
+	    "value": "config-query"
+  	},
+  	{
+  	  "key": "name",
+	    "value": "CONFIG QUERY"
+  	},
+  	{
+  	  "key": "name",
+	    "value": "MTLS Certificate Group"
+  	}
+  ],
+  "add-config":[
+	  {
+	    "resourceType": "siteAuthenticators",
+	    "item":
+      {
+          "configuration": {"keyPairId": "5"},
+          "name": "CDR-SiteAuthenticator",
+          "className": "com.pingidentity.pa.siteauthenticators.MutualTlsSiteAuthenticator",
+          "id": 1
+      }
+	  },
+	  {
+	    "resourceType": "trustedCertGroups",
+	    "item":
+      {
+          "skipCertificateDateCheck": true,
+          "name": "MTLS Certificate Group",
+          "useJavaTrustStore": false,
+          "certIds": [17],
+          "id": 3,
+          "systemGroup": false,
+          "ignoreAllCertificateErrors": false,
+          "revocationChecking": {
+              "ocsp": false,
+              "denyRevocationStatusUnknown": false,
+              "crlChecking": false
+          }
+      }
+	  }
+  ],
+  "expose-parameters":[
+    {
+      "parameter-name": "fileData",
+      "unique-identifiers": [
+          "alias"
+      ]
+    },
+    {
+      "parameter-name": "encryptedValue",
+      "replace-name": "value",
+      "unique-identifiers": [
+          "name"
+      ]
+    },
+    {
+      "parameter-name": "password",
+      "unique-identifiers": [
+          "alias"
+      ]
+    }
+  ]
+}

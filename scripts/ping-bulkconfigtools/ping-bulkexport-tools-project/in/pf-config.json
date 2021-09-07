@@ -1,0 +1,84 @@
+{
+  "sort-arrays":[
+	"roles","scopes"
+  ],
+  "config-aliases":[
+        {
+          "config-names":[
+            "administrativeAccounts_items_Administrator_password"
+          ],
+          "replace-name": "PING_IDENTITY_PASSWORD",
+          "is-apply-envfile": false
+        }
+  ],
+  "search-replace":[
+    {
+      "search": "dc=example,dc=com",
+      "replace": "${USER_BASE_DN}",
+      "apply-env-file": false
+    }
+  ],
+  "remove-config":[
+  	{
+  	  "key": "id",
+	    "value": "ProvisionerDS"
+  	}
+  ],
+  "expose-parameters":[
+    {
+      "parameter-name": "fileData",
+      "unique-identifiers": [
+          "id"
+      ]
+    },
+    {
+      "parameter-name": "encryptedCredential",
+      "replace-name": "credential",
+      "unique-identifiers": [
+          "name"
+      ]
+    },
+    {
+      "parameter-name": "encryptedValue",
+      "replace-name": "value",
+      "unique-identifiers": [
+          "name",
+          "name~Username/value"
+      ]
+    },
+    {
+      "parameter-name": "encryptedPassword",
+      "replace-name": "password",
+      "unique-identifiers": [
+          "id",
+          "username"
+      ]
+    },
+    {
+      "parameter-name": "encryptedKeyData",
+      "replace-name": "keyData",
+      "unique-identifiers": [
+          "id"
+      ]
+    },
+    {
+      "parameter-name": "encryptedSecret",
+      "replace-name": "secret",
+      "unique-identifiers": [
+          "clientId"
+      ]
+    },
+    {
+      "parameter-name": "value",
+      "unique-identifiers": [
+          "name=PingID Properties"
+      ]
+    },
+    {
+      "parameter-name": "value",
+      "unique-identifiers": [
+          "name=PingID SDK Properties"
+      ]
+    }
+  ]
+}

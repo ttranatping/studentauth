@@ -36,8 +36,8 @@ services:
     # You may need to comment this tmpfs line if you run containers on windows
     tmpfs: /run/secrets
     environment:
-      - SERVER_PROFILE_URL=https://github.com/pingidentity/pingidentity-server-profiles.git
-      - SERVER_PROFILE_PATH=baseline/pingfederate
+#      - SERVER_PROFILE_URL=https://github.com/pingidentity/pingidentity-server-profiles.git
+#      - SERVER_PROFILE_PATH=baseline/pingfederate
       - VERBOSE=false
     env_file:
       # Configuration file created when setup.sh (Getting-started project root directory) is first run to source
