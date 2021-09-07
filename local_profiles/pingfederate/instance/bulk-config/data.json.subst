@@ -26,16 +26,6 @@
         },
         {
             "operationType": "SAVE",
-            "subResource": "org.sourceid.common.ExpressionManager",
-            "items": [{
-                "stringValue": "",
-                "id": "evaluateExpressions",
-                "type": "STRING"
-            }],
-            "resourceType": "/configStore"
-        },
-        {
-            "operationType": "SAVE",
             "subResource": "org.sourceid.oauth20.domain.ClientManagerLdapImpl",
             "items": [
                 {
@@ -778,6 +768,10 @@
                             "value": "120"
                         },
                         {
+                            "name": "Use Centralized Signing Key",
+                            "value": "false"
+                        },
+                        {
                             "name": "JWS Algorithm",
                             "value": "RS256"
                         },
@@ -808,10 +802,6 @@
                         {
                             "name": "Asymmetric Encryption JWKS URL",
                             "value": ""
-                        },
-                        {
-                            "name": "Use Centralized Signing Key",
-                            "value": "false"
                         },
                         {
                             "name": "Include Key ID Header Parameter",
@@ -901,6 +891,7 @@
                     "coreAttributes": [],
                     "extendedAttributes": [
                         {"name": "Username"},
+                        {"name": "active"},
                         {"name": "OrgName"}
                     ]
                 },
@@ -1893,12 +1884,37 @@
                             "source": {"type": "AUTHENTICATION_POLICY_CONTRACT"},
                             "value": "subject"
                         },
+                        "active": {
+                            "source": {"type": "EXPRESSION"},
+                            "value": "true"
+                        },
                         "OrgName": {
                             "source": {"type": "TEXT"},
                             "value": "PingIdentity"
                         }
                     },
                     "id": "authz_req|apc.Zxp6N6W5PH9onACT|jwt",
+                    "attributeSources": [],
+                    "issuanceCriteria": {"conditionalCriteria": []},
+                    "accessTokenManagerRef": {
+                        "location": "https://localhost:9999/pf-admin-api/v1/oauth/accessTokenManagers/jwt",
+                        "id": "jwt"
+                    }
+                },
+                {
+                    "context": {"type": "CLIENT_CREDENTIALS"},
+                    "attributeContractFulfillment": {
+                        "Username": {
+                            "source": {"type": "TEXT"},
+                            "value": "administrator"
+                        },
+                        "active": {
+                            "source": {"type": "EXPRESSION"},
+                            "value": "true"
+                        },
+                        "OrgName": {"source": {"type": "NO_MAPPING"}}
+                    },
+                    "id": "client_credentials|jwt",
                     "attributeSources": [],
                     "issuanceCriteria": {"conditionalCriteria": []},
                     "accessTokenManagerRef": {
@@ -1918,6 +1934,10 @@
                         "Username": {
                             "source": {"type": "PASSWORD_CREDENTIAL_VALIDATOR"},
                             "value": "mail"
+                        },
+                        "active": {
+                            "source": {"type": "EXPRESSION"},
+                            "value": "true"
                         },
                         "OrgName": {
                             "source": {"type": "TEXT"},
