@@ -58,6 +58,21 @@
       "search": "Asia-Pacific",
       "replace": "${PINGONE_CONNECTION_REGION}",
       "apply-env-file": true
+    },
+    {
+      "search": "2ffffdea-b209-44e1-bd1f-93c660e1b02c",
+      "replace": "${PINGONE_MFA_POPULATIONID}",
+      "apply-env-file": true
+    },
+    {
+      "search": "8a07f5e9-9882-4558-90b0-45adc4a6581e",
+      "replace": "${PINGONE_MFA_CLIENTID}",
+      "apply-env-file": true
+    },
+    {
+      "search": "Multi_Factor",
+      "replace": "${PINGONE_MFA_MFAPOLICY}",
+      "apply-env-file": true
     }
   ],
   "remove-config":[

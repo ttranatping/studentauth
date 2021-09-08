@@ -300,7 +300,7 @@
                 "credentialId": "${PINGONE_CONNECTION_CREDENTIALID}",
                 "pingOneAuthenticationApiEndpoint": "${PINGONE_CONNECTION_AUTHENDPOINT}",
                 "id": "lPVmy2CTYZ88vlYZksW5Lq",
-                "creationDate": "2021-09-08T01:58:49.231Z",
+                "creationDate": "2021-09-08T02:33:13.388Z",
                 "region": "${PINGONE_CONNECTION_REGION}",
                 "pingOneManagementApiEndpoint": "${PINGONE_CONNECTION_APIENDPOINT}"
             }],
@@ -406,13 +406,7 @@
         },
         {
             "operationType": "SAVE",
-            "items": [{
-                "dataStoreRef": {
-                    "location": "https://localhost:9999/pf-admin-api/v1/dataStores",
-                    "id": ""
-                },
-                "synchronizationFrequency": 60
-            }],
+            "items": [{"synchronizationFrequency": 60}],
             "resourceType": "/serverSettings/outboundProvisioning"
         },
         {
@@ -1272,6 +1266,196 @@
                 {
                     "attributeMapping": {
                         "attributeContractFulfillment": {
+                            "access_token": {
+                                "source": {"type": "ADAPTER"},
+                                "value": "access_token"
+                            },
+                            "pingone.mfa.status": {
+                                "source": {"type": "ADAPTER"},
+                                "value": "pingone.mfa.status"
+                            },
+                            "id_token": {
+                                "source": {"type": "ADAPTER"},
+                                "value": "id_token"
+                            },
+                            "pingone.mfa.status.reason": {
+                                "source": {"type": "ADAPTER"},
+                                "value": "pingone.mfa.status.reason"
+                            },
+                            "username": {
+                                "source": {"type": "ADAPTER"},
+                                "value": "username"
+                            }
+                        },
+                        "attributeSources": [],
+                        "issuanceCriteria": {"conditionalCriteria": []}
+                    },
+                    "configuration": {
+                        "tables": [],
+                        "fields": [
+                            {
+                                "name": "PingOne Environment",
+                                "value": "lPVmy2CTYZ88vlYZksW5Lq|${PINGONE_CONNECTION_ENVIRONMENTID}"
+                            },
+                            {
+                                "name": "PingOne Population",
+                                "value": "${PINGONE_MFA_POPULATIONID}"
+                            },
+                            {
+                                "name": "Application",
+                                "value": "${PINGONE_MFA_CLIENTID}"
+                            },
+                            {
+                                "name": "PingOne Authentication Policy",
+                                "value": "${PINGONE_MFA_MFAPOLICY}"
+                            },
+                            {
+                                "name": "PingOne Management API",
+                                "value": "https://api.pingone.com"
+                            },
+                            {
+                                "name": "PingOne Authentication API",
+                                "value": "https://auth.pingone.com"
+                            },
+                            {
+                                "name": "Notification Template Variant Override",
+                                "value": ""
+                            },
+                            {
+                                "name": "Test Username",
+                                "value": ""
+                            },
+                            {
+                                "name": "HTML Template Prefix",
+                                "value": "pingone-mfa"
+                            },
+                            {
+                                "name": "Messages Files",
+                                "value": "pingone-mfa-messages"
+                            },
+                            {
+                                "name": "Prompt Users to Set Up MFA",
+                                "value": "true"
+                            },
+                            {
+                                "name": "Allow Users to Skip MFA Setup",
+                                "value": "true"
+                            },
+                            {
+                                "name": "Allow Users to Add Additional Authentication Methods",
+                                "value": "true"
+                            },
+                            {
+                                "name": "Provision Users and Authentication Methods",
+                                "value": "true"
+                            },
+                            {
+                                "name": "Update Authentication Methods",
+                                "value": "false"
+                            },
+                            {
+                                "name": "Username Attribute",
+                                "value": ""
+                            },
+                            {
+                                "name": "SMS Attribute",
+                                "value": "sms"
+                            },
+                            {
+                                "name": "Voice Attribute",
+                                "value": "voice"
+                            },
+                            {
+                                "name": "Email Attribute",
+                                "value": "email"
+                            },
+                            {
+                                "name": "DEFAULT AUTHENTICATION METHOD FOR PROVISIONED USERS",
+                                "value": "SMS"
+                            },
+                            {
+                                "name": "User Not Found Failure Mode",
+                                "value": "Block user"
+                            },
+                            {
+                                "name": "Service Unavailable Failure Mode",
+                                "value": "Bypass authentication"
+                            },
+                            {
+                                "name": "Change Device",
+                                "value": "Allow"
+                            },
+                            {
+                                "name": "Show Success Screens",
+                                "value": "true"
+                            },
+                            {
+                                "name": "Show Error Screens",
+                                "value": "true"
+                            },
+                            {
+                                "name": "Show Timeout Screens",
+                                "value": "true"
+                            },
+                            {
+                                "name": "API Request Timeout",
+                                "value": "12000"
+                            },
+                            {
+                                "name": "Proxy Settings",
+                                "value": "System Defaults"
+                            },
+                            {
+                                "name": "Custom Proxy Host",
+                                "value": ""
+                            },
+                            {
+                                "name": "Custom Proxy Port",
+                                "value": ""
+                            }
+                        ]
+                    },
+                    "name": "pingoneMFAAdapter",
+                    "id": "pingoneMFAAdapter",
+                    "pluginDescriptorRef": {
+                        "location": "https://localhost:9999/pf-admin-api/v1/idp/adapters/descriptors/com.pingidentity.adapters.pingone.mfa.PingOneMfaIdpAdapter",
+                        "id": "com.pingidentity.adapters.pingone.mfa.PingOneMfaIdpAdapter"
+                    },
+                    "attributeContract": {
+                        "maskOgnlValues": false,
+                        "coreAttributes": [
+                            {
+                                "masked": false,
+                                "name": "access_token",
+                                "pseudonym": false
+                            },
+                            {
+                                "masked": false,
+                                "name": "pingone.mfa.status",
+                                "pseudonym": false
+                            },
+                            {
+                                "masked": false,
+                                "name": "id_token",
+                                "pseudonym": false
+                            },
+                            {
+                                "masked": false,
+                                "name": "pingone.mfa.status.reason",
+                                "pseudonym": false
+                            },
+                            {
+                                "masked": false,
+                                "name": "username",
+                                "pseudonym": true
+                            }
+                        ],
+                        "extendedAttributes": []
+                    }
+                },
+                {
+                    "attributeMapping": {
+                        "attributeContractFulfillment": {
                             "studentDN": {
                                 "source": {"type": "ADAPTER"},
                                 "value": "studentDN"
@@ -2112,7 +2296,7 @@
                 "failIfNoSelection": false,
                 "authnSelectionTrees": [
                     {
-                        "name": "Teacher AuthN Policy",
+                        "name": "Default AuthN Policy",
                         "enabled": true,
                         "rootNode": {
                             "children": [
@@ -2127,32 +2311,131 @@
                                             "type": "DONE"
                                         }},
                                         {"action": {
-                                            "attributeMapping": {
+                                            "localIdentityRef": {
+                                                "location": "https://localhost:9999/pf-admin-api/v1/localIdentity/identityProfiles/RBSQIwi5KWYN9ZGK",
+                                                "id": "RBSQIwi5KWYN9ZGK"
+                                            },
+                                            "inboundMapping": {
+                                                "attributeContractFulfillment": {"pf.local.identity.unique.id": {
+                                                    "source": {
+                                                        "id": "HTMLFormPD",
+                                                        "type": "ADAPTER"
+                                                    },
+                                                    "value": "username"
+                                                }},
+                                                "attributeSources": [],
+                                                "issuanceCriteria": {"conditionalCriteria": []}
+                                            },
+                                            "context": "Success",
+                                            "outboundAttributeMapping": {
                                                 "attributeContractFulfillment": {
                                                     "mail": {
                                                         "source": {
-                                                            "id": "HTMLFormPD",
-                                                            "type": "ADAPTER"
+                                                            "id": "RBSQIwi5KWYN9ZGK",
+                                                            "type": "LOCAL_IDENTITY_PROFILE"
                                                         },
-                                                        "value": "username"
+                                                        "value": "mail"
                                                     },
                                                     "subject": {
                                                         "source": {
-                                                            "id": "HTMLFormPD",
-                                                            "type": "ADAPTER"
+                                                            "id": "RBSQIwi5KWYN9ZGK",
+                                                            "type": "LOCAL_IDENTITY_PROFILE"
                                                         },
-                                                        "value": "username"
+                                                        "value": "entryUUID"
                                                     }
                                                 },
                                                 "attributeSources": [],
                                                 "issuanceCriteria": {"conditionalCriteria": []}
                                             },
-                                            "authenticationPolicyContractRef": {
-                                                "location": "https://localhost:9999/pf-admin-api/v1/authenticationPolicyContracts/Zxp6N6W5PH9onACT",
-                                                "id": "Zxp6N6W5PH9onACT"
+                                            "type": "LOCAL_IDENTITY_MAPPING"
+                                        }}
+                                    ],
+                                    "action": {
+                                        "authenticationSource": {
+                                            "type": "IDP_ADAPTER",
+                                            "sourceRef": {
+                                                "location": "https://localhost:9999/pf-admin-api/v1/idp/adapters/pingoneMFAAdapter",
+                                                "id": "pingoneMFAAdapter"
+                                            }
+                                        },
+                                        "context": "Success",
+                                        "inputUserIdMapping": {
+                                            "source": {
+                                                "id": "HTMLFormPD",
+                                                "type": "ADAPTER"
+                                            },
+                                            "value": "username"
+                                        },
+                                        "userIdAuthenticated": true,
+                                        "type": "AUTHN_SOURCE"
+                                    }
+                                }
+                            ],
+                            "action": {
+                                "authenticationSource": {
+                                    "type": "IDP_ADAPTER",
+                                    "sourceRef": {
+                                        "location": "https://localhost:9999/pf-admin-api/v1/idp/adapters/HTMLFormPD",
+                                        "id": "HTMLFormPD"
+                                    }
+                                },
+                                "type": "AUTHN_SOURCE"
+                            }
+                        }
+                    },
+                    {
+                        "name": "Teacher AuthN Policy",
+                        "enabled": false,
+                        "rootNode": {
+                            "children": [
+                                {"action": {
+                                    "context": "Fail",
+                                    "type": "DONE"
+                                }},
+                                {
+                                    "children": [
+                                        {"action": {
+                                            "context": "Fail",
+                                            "type": "DONE"
+                                        }},
+                                        {"action": {
+                                            "localIdentityRef": {
+                                                "location": "https://localhost:9999/pf-admin-api/v1/localIdentity/identityProfiles/RBSQIwi5KWYN9ZGK",
+                                                "id": "RBSQIwi5KWYN9ZGK"
+                                            },
+                                            "inboundMapping": {
+                                                "attributeContractFulfillment": {"pf.local.identity.unique.id": {
+                                                    "source": {
+                                                        "id": "HTMLFormPD",
+                                                        "type": "ADAPTER"
+                                                    },
+                                                    "value": "username"
+                                                }},
+                                                "attributeSources": [],
+                                                "issuanceCriteria": {"conditionalCriteria": []}
                                             },
                                             "context": "Success",
-                                            "type": "APC_MAPPING"
+                                            "outboundAttributeMapping": {
+                                                "attributeContractFulfillment": {
+                                                    "mail": {
+                                                        "source": {
+                                                            "id": "RBSQIwi5KWYN9ZGK",
+                                                            "type": "LOCAL_IDENTITY_PROFILE"
+                                                        },
+                                                        "value": "mail"
+                                                    },
+                                                    "subject": {
+                                                        "source": {
+                                                            "id": "RBSQIwi5KWYN9ZGK",
+                                                            "type": "LOCAL_IDENTITY_PROFILE"
+                                                        },
+                                                        "value": "entryUUID"
+                                                    }
+                                                },
+                                                "attributeSources": [],
+                                                "issuanceCriteria": {"conditionalCriteria": []}
+                                            },
+                                            "type": "LOCAL_IDENTITY_MAPPING"
                                         }}
                                     ],
                                     "action": {
@@ -2175,65 +2458,6 @@
                                         "type": "AUTHN_SOURCE"
                                     }
                                 },
-                                {"action": {
-                                    "attributeMapping": {
-                                        "attributeContractFulfillment": {
-                                            "mail": {
-                                                "source": {
-                                                    "id": "HTMLFormPD",
-                                                    "type": "ADAPTER"
-                                                },
-                                                "value": "username"
-                                            },
-                                            "subject": {
-                                                "source": {
-                                                    "id": "HTMLFormPD",
-                                                    "type": "ADAPTER"
-                                                },
-                                                "value": "username"
-                                            }
-                                        },
-                                        "attributeSources": [],
-                                        "issuanceCriteria": {"conditionalCriteria": []}
-                                    },
-                                    "authenticationPolicyContractRef": {
-                                        "location": "https://localhost:9999/pf-admin-api/v1/authenticationPolicyContracts/Zxp6N6W5PH9onACT",
-                                        "id": "Zxp6N6W5PH9onACT"
-                                    },
-                                    "context": "Success",
-                                    "type": "APC_MAPPING"
-                                }}
-                            ],
-                            "action": {
-                                "authenticationSource": {
-                                    "type": "IDP_ADAPTER",
-                                    "sourceRef": {
-                                        "location": "https://localhost:9999/pf-admin-api/v1/idp/adapters/HTMLFormPD",
-                                        "id": "HTMLFormPD"
-                                    }
-                                },
-                                "attributeRules": {
-                                    "fallbackToSuccess": true,
-                                    "items": [{
-                                        "result": "Teacher",
-                                        "condition": "EQUALS_CASE_INSENSITIVE",
-                                        "expectedValue": "true",
-                                        "attributeName": "isTeacher"
-                                    }]
-                                },
-                                "type": "AUTHN_SOURCE"
-                            }
-                        }
-                    },
-                    {
-                        "name": "Default AuthN Policy",
-                        "enabled": false,
-                        "rootNode": {
-                            "children": [
-                                {"action": {
-                                    "context": "Fail",
-                                    "type": "DONE"
-                                }},
                                 {"action": {
                                     "localIdentityRef": {
                                         "location": "https://localhost:9999/pf-admin-api/v1/localIdentity/identityProfiles/RBSQIwi5KWYN9ZGK",
@@ -2281,6 +2505,15 @@
                                         "location": "https://localhost:9999/pf-admin-api/v1/idp/adapters/HTMLFormPD",
                                         "id": "HTMLFormPD"
                                     }
+                                },
+                                "attributeRules": {
+                                    "fallbackToSuccess": true,
+                                    "items": [{
+                                        "result": "Teacher",
+                                        "condition": "EQUALS_CASE_INSENSITIVE",
+                                        "expectedValue": "true",
+                                        "attributeName": "isTeacher"
+                                    }]
                                 },
                                 "type": "AUTHN_SOURCE"
                             }
