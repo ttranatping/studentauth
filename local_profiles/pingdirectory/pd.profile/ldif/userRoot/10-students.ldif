@@ -1,0 +1,69 @@
+dn: uid=student.0,ou=students,ou=people,${USER_BASE_DN}
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+objectClass: pf-connected-identities
+sn: Brooke
+cn: Raeann Brooke
+givenName: Raeann
+uid: student.0
+mail: student.0@example.com
+userPassword: 2FederateM0re
+pf-connected-identity: auth-source=pf-local-identity:user-id=student.0
+
+dn: uid=student.1,ou=students,ou=people,${USER_BASE_DN}
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+objectClass: pf-connected-identities
+sn: Seawell
+cn: Esko Seawell
+givenName: Esko
+uid: student.1
+mail: student.1@example.com
+userPassword: 2FederateM0re
+pf-connected-identity: auth-source=pf-local-identity:user-id=student.1
+
+dn: uid=student.2,ou=students,ou=people,${USER_BASE_DN}
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+objectClass: pf-connected-identities
+sn: Tancordo
+cn: Sidonia Tancordo
+givenName: Sidonia
+uid: student.2
+mail: student.2@example.com
+userPassword: 2FederateM0re
+pf-connected-identity: auth-source=pf-local-identity:user-id=student.2
+
+dn: uid=student.3,ou=students,ou=people,${USER_BASE_DN}
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+objectClass: pf-connected-identities
+sn: Knio
+cn: Pierre-Marc Knio
+givenName: Pierre-Marc
+uid: student.3
+mail: student.3@example.com
+userPassword: 2FederateM0re
+pf-connected-identity: auth-source=pf-local-identity:user-id=student.3
+
+dn: uid=student.4,ou=students,ou=people,${USER_BASE_DN}
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+objectClass: pf-connected-identities
+sn: Psutka
+cn: Terza Psutka
+givenName: Terza
+uid: student.4
+mail: student.4@example.com
+userPassword: 2FederateM0re
+pf-connected-identity: auth-source=pf-local-identity:user-id=student.4

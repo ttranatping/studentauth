@@ -300,7 +300,7 @@
                 "credentialId": "${PINGONE_CONNECTION_CREDENTIALID}",
                 "pingOneAuthenticationApiEndpoint": "${PINGONE_CONNECTION_AUTHENDPOINT}",
                 "id": "lPVmy2CTYZ88vlYZksW5Lq",
-                "creationDate": "2021-09-08T02:33:13.388Z",
+                "creationDate": "2021-09-08T06:59:40.052Z",
                 "region": "${PINGONE_CONNECTION_REGION}",
                 "pingOneManagementApiEndpoint": "${PINGONE_CONNECTION_APIENDPOINT}"
             }],
@@ -406,7 +406,13 @@
         },
         {
             "operationType": "SAVE",
-            "items": [{"synchronizationFrequency": 60}],
+            "items": [{
+                "dataStoreRef": {
+                    "location": "https://localhost:9999/pf-admin-api/v1/dataStores",
+                    "id": ""
+                },
+                "synchronizationFrequency": 60
+            }],
             "resourceType": "/serverSettings/outboundProvisioning"
         },
         {
@@ -2031,11 +2037,18 @@
                 ],
                 "scopeForOAuthGrantManagement": "",
                 "parReferenceTimeout": 60,
-                "exclusiveScopes": [{
-                    "name": "urn:pingidentity:directory-delegated-admin",
-                    "description": "Directory Delegated Admin",
-                    "dynamic": false
-                }],
+                "exclusiveScopes": [
+                    {
+                        "name": "urn:pingidentity:directory-delegated-admin",
+                        "description": "Directory Delegated Admin",
+                        "dynamic": false
+                    },
+                    {
+                        "name": "ds",
+                        "description": "Directory Service Rest API",
+                        "dynamic": false
+                    }
+                ],
                 "parReferenceLength": 24,
                 "bypassAuthorizationForApprovedGrants": false
             }],
@@ -2345,6 +2358,23 @@
                         }
                     },
                     "id": "authz_req|apc.Zxp6N6W5PH9onACT|jwt",
+                    "attributeSources": [],
+                    "issuanceCriteria": {"conditionalCriteria": []},
+                    "accessTokenManagerRef": {
+                        "location": "https://localhost:9999/pf-admin-api/v1/oauth/accessTokenManagers/jwt",
+                        "id": "jwt"
+                    }
+                },
+                {
+                    "context": {"type": "CLIENT_CREDENTIALS"},
+                    "attributeContractFulfillment": {
+                        "Username": {
+                            "source": {"type": "TEXT"},
+                            "value": "administrator"
+                        },
+                        "OrgName": {"source": {"type": "NO_MAPPING"}}
+                    },
+                    "id": "client_credentials|jwt",
                     "attributeSources": [],
                     "issuanceCriteria": {"conditionalCriteria": []},
                     "accessTokenManagerRef": {

@@ -58,9 +58,9 @@ services:
     image: pingidentity/pingdirectory:edge
     # You may need to comment this tmpfs line if you run containers on windows
     tmpfs: /run/secrets
-    environment:
-      - SERVER_PROFILE_URL=https://github.com/pingidentity/pingidentity-server-profiles.git
-      - SERVER_PROFILE_PATH=baseline/pingdirectory
+#    environment:
+#      - SERVER_PROFILE_URL=https://github.com/pingidentity/pingidentity-server-profiles.git
+#      - SERVER_PROFILE_PATH=baseline/pingdirectory
     env_file:
       - ${HOME}/.pingidentity/devops
       - settings.env
@@ -94,14 +94,16 @@ services:
     tmpfs: /run/secrets
     environment:
       - PD_ENGINE_PUBLIC_PORT=1443
-      - SERVER_PROFILE_URL=https://github.com/pingidentity/pingidentity-server-profiles.git
-      - SERVER_PROFILE_PATH=baseline/pingdelegator
+#      - SERVER_PROFILE_URL=https://github.com/pingidentity/pingidentity-server-profiles.git
+#      - SERVER_PROFILE_PATH=baseline/pingdelegator
     env_file:
       - ${HOME}/.pingidentity/devops
     ports:
       - "6443:6443"
     networks:
       - pingnet
+    volumes:
+      - ./local_profiles/pingdelegator:/opt/in
 
 networks:
     pingnet:
