@@ -1,3 +1,4 @@
+licenses/*.lic
 settings.env
 scripts/ping-bulkconfigtools/ping-bulkexport-tools-project/target
 scripts/ping-bulkconfigtools/ping-bulkexport-tools-project/target/*

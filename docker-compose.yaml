@@ -53,6 +53,7 @@ services:
     volumes:
 #      - pingfederate-out:/opt/out
       - ./local_profiles/pingfederate:/opt/in
+      - ./licenses/pingfederate.lic:/opt/in/instance/server/default/conf/pingfederate.lic
 
   pingdirectory:
     image: pingidentity/pingdirectory:edge
@@ -80,6 +81,7 @@ services:
     volumes:
       - pingdirectory-out:/opt/out
       - ./local_profiles/pingdirectory:/opt/in
+      - /opt/in/pd.profile/server-root/pre-setup/PingDirectory.lic
 
   pingdataconsole:
     image: pingidentity/pingdataconsole:edge
