@@ -1456,6 +1456,106 @@
                 {
                     "attributeMapping": {
                         "attributeContractFulfillment": {
+                            "riskLevel": {
+                                "source": {"type": "ADAPTER"},
+                                "value": "riskLevel"
+                            },
+                            "riskValue": {
+                                "source": {"type": "ADAPTER"},
+                                "value": "riskValue"
+                            }
+                        },
+                        "attributeSources": [],
+                        "issuanceCriteria": {"conditionalCriteria": []}
+                    },
+                    "configuration": {
+                        "tables": [
+                            {
+                                "name": "Additional User Attributes (optional)",
+                                "rows": []
+                            },
+                            {
+                                "name": "PingOne Risk API Response Mappings (optional)",
+                                "rows": []
+                            }
+                        ],
+                        "fields": [
+                            {
+                                "name": "PingOne Environment",
+                                "value": "lPVmy2CTYZ88vlYZksW5Lq|${PINGONE_CONNECTION_ENVIRONMENTID}"
+                            },
+                            {
+                                "name": "PingOne Risk Policy",
+                                "value": "${PINGONE_RISK_RISKPOLICY}"
+                            },
+                            {
+                                "name": "Include Device Profile",
+                                "value": "true"
+                            },
+                            {
+                                "name": "Device Profiling Method",
+                                "value": "Captured by this adapter"
+                            },
+                            {
+                                "name": "Device Profiling Timeout",
+                                "value": "5000"
+                            },
+                            {
+                                "name": "Cookie Name Prefix",
+                                "value": "pingone.risk.device.profile"
+                            },
+                            {
+                                "name": "Failure Mode",
+                                "value": "Continue with fallback policy decision"
+                            },
+                            {
+                                "name": "Fallback Policy Decision Value",
+                                "value": "MEDIUM"
+                            },
+                            {
+                                "name": "API Request Timeout",
+                                "value": "2000"
+                            },
+                            {
+                                "name": "Proxy Settings",
+                                "value": "System Defaults"
+                            },
+                            {
+                                "name": "Custom Proxy Host",
+                                "value": ""
+                            },
+                            {
+                                "name": "Custom Proxy Port",
+                                "value": ""
+                            }
+                        ]
+                    },
+                    "name": "pingoneRiskAdapter",
+                    "id": "pingoneRiskAdapter",
+                    "pluginDescriptorRef": {
+                        "location": "https://localhost:9999/pf-admin-api/v1/idp/adapters/descriptors/com.pingidentity.adapters.pingone.risk.PingOneRiskManagementIdpAdapter",
+                        "id": "com.pingidentity.adapters.pingone.risk.PingOneRiskManagementIdpAdapter"
+                    },
+                    "attributeContract": {
+                        "maskOgnlValues": false,
+                        "coreAttributes": [
+                            {
+                                "masked": false,
+                                "name": "riskLevel",
+                                "pseudonym": true
+                            },
+                            {
+                                "masked": false,
+                                "name": "riskValue",
+                                "pseudonym": true
+                            }
+                        ],
+                        "extendedAttributes": []
+                    }
+                },
+                {
+                    "attributeMapping": {
+                        "attributeContractFulfillment": {
                             "studentDN": {
                                 "source": {"type": "ADAPTER"},
                                 "value": "studentDN"
@@ -2326,7 +2426,7 @@
                                                 "attributeSources": [],
                                                 "issuanceCriteria": {"conditionalCriteria": []}
                                             },
-                                            "context": "Success",
+                                            "context": "LOW",
                                             "outboundAttributeMapping": {
                                                 "attributeContractFulfillment": {
                                                     "mail": {
@@ -2348,14 +2448,84 @@
                                                 "issuanceCriteria": {"conditionalCriteria": []}
                                             },
                                             "type": "LOCAL_IDENTITY_MAPPING"
+                                        }},
+                                        {
+                                            "children": [
+                                                {"action": {
+                                                    "context": "Fail",
+                                                    "type": "DONE"
+                                                }},
+                                                {"action": {
+                                                    "localIdentityRef": {
+                                                        "location": "https://localhost:9999/pf-admin-api/v1/localIdentity/identityProfiles/RBSQIwi5KWYN9ZGK",
+                                                        "id": "RBSQIwi5KWYN9ZGK"
+                                                    },
+                                                    "inboundMapping": {
+                                                        "attributeContractFulfillment": {"pf.local.identity.unique.id": {
+                                                            "source": {
+                                                                "id": "HTMLFormPD",
+                                                                "type": "ADAPTER"
+                                                            },
+                                                            "value": "username"
+                                                        }},
+                                                        "attributeSources": [],
+                                                        "issuanceCriteria": {"conditionalCriteria": []}
+                                                    },
+                                                    "context": "Success",
+                                                    "outboundAttributeMapping": {
+                                                        "attributeContractFulfillment": {
+                                                            "mail": {
+                                                                "source": {
+                                                                    "id": "RBSQIwi5KWYN9ZGK",
+                                                                    "type": "LOCAL_IDENTITY_PROFILE"
+                                                                },
+                                                                "value": "mail"
+                                                            },
+                                                            "subject": {
+                                                                "source": {
+                                                                    "id": "RBSQIwi5KWYN9ZGK",
+                                                                    "type": "LOCAL_IDENTITY_PROFILE"
+                                                                },
+                                                                "value": "entryUUID"
+                                                            }
+                                                        },
+                                                        "attributeSources": [],
+                                                        "issuanceCriteria": {"conditionalCriteria": []}
+                                                    },
+                                                    "type": "LOCAL_IDENTITY_MAPPING"
+                                                }}
+                                            ],
+                                            "action": {
+                                                "authenticationSource": {
+                                                    "type": "IDP_ADAPTER",
+                                                    "sourceRef": {
+                                                        "location": "https://localhost:9999/pf-admin-api/v1/idp/adapters/pingoneMFAAdapter",
+                                                        "id": "pingoneMFAAdapter"
+                                                    }
+                                                },
+                                                "context": "MEDIUM",
+                                                "inputUserIdMapping": {
+                                                    "source": {
+                                                        "id": "HTMLFormPD",
+                                                        "type": "ADAPTER"
+                                                    },
+                                                    "value": "username"
+                                                },
+                                                "userIdAuthenticated": true,
+                                                "type": "AUTHN_SOURCE"
+                                            }
+                                        },
+                                        {"action": {
+                                            "context": "HIGH",
+                                            "type": "DONE"
                                         }}
                                     ],
                                     "action": {
                                         "authenticationSource": {
                                             "type": "IDP_ADAPTER",
                                             "sourceRef": {
-                                                "location": "https://localhost:9999/pf-admin-api/v1/idp/adapters/pingoneMFAAdapter",
-                                                "id": "pingoneMFAAdapter"
+                                                "location": "https://localhost:9999/pf-admin-api/v1/idp/adapters/pingoneRiskAdapter",
+                                                "id": "pingoneRiskAdapter"
                                             }
                                         },
                                         "context": "Success",
@@ -2367,6 +2537,29 @@
                                             "value": "username"
                                         },
                                         "userIdAuthenticated": true,
+                                        "attributeRules": {
+                                            "fallbackToSuccess": false,
+                                            "items": [
+                                                {
+                                                    "result": "LOW",
+                                                    "condition": "EQUALS",
+                                                    "expectedValue": "LOW",
+                                                    "attributeName": "riskLevel"
+                                                },
+                                                {
+                                                    "result": "MEDIUM",
+                                                    "condition": "EQUALS",
+                                                    "expectedValue": "MEDIUM",
+                                                    "attributeName": "riskLevel"
+                                                },
+                                                {
+                                                    "result": "HIGH",
+                                                    "condition": "EQUALS",
+                                                    "expectedValue": "HIGH",
+                                                    "attributeName": "riskLevel"
+                                                }
+                                            ]
+                                        },
                                         "type": "AUTHN_SOURCE"
                                     }
                                 }

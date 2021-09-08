@@ -73,6 +73,11 @@
       "search": "Multi_Factor",
       "replace": "${PINGONE_MFA_MFAPOLICY}",
       "apply-env-file": true
+    },
+    {
+      "search": "e9161694-28ef-0e77-34f1-e067e6f9bb51",
+      "replace": "${PINGONE_RISK_RISKPOLICY}",
+      "apply-env-file": true
     }
   ],
   "remove-config":[
