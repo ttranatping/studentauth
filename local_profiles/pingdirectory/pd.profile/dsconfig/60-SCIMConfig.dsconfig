@@ -3,6 +3,10 @@ dsconfig create-scim-schema \
   --set display-name:User
 
 dsconfig create-scim-attribute \
+    --schema-name urn:pingidentity:schemas:User:1.0  \
+    --attribute-name userType
+
+dsconfig create-scim-attribute \
   --schema-name urn:pingidentity:schemas:User:1.0 \
   --attribute-name displayName
 
@@ -35,15 +39,38 @@ dsconfig create-scim-attribute \
   --attribute-name photos  \
   --set multi-valued:true
 
+dsconfig create-scim-attribute \
+  --schema-name urn:pingidentity:schemas:User:1.0 \
+  --attribute-name groups  \
+  --set multi-valued:true
+
 dsconfig create-scim-resource-type \
+    --type-name Users  \
+    --type ldap-mapping  \
+    --set enabled:true  \
+    --set endpoint:Users  \
+    --set structural-ldap-objectclass:inetOrgPerson  \
+    --set include-base-dn:ou=people,dc=example,dc=com  \
+    --set include-operational-attribute:isMemberOf  \
+    --set include-operational-attribute:entryUUID  \
+    --set core-schema:urn:pingidentity:schemas:User:1.0
+
+dsconfig create-correlated-ldap-data-view \
+    --type-name Users  \
+    --view-name correlatedGroups  \
+    --set structural-ldap-objectclass:groupOfNames  \
+    --set include-base-dn:ou=Groups,dc=example,dc=com  \
+    --set include-operational-attribute:entryDN  \
+    --set include-operational-attribute:entryUUID  \
+    --set primary-correlation-attribute:entryDN  \
+    --set secondary-correlation-attribute:member
+
+dsconfig create-scim-attribute-mapping \
   --type-name Users \
-  --type ldap-mapping \
-  --set enabled:true \
-  --set endpoint:Users \
-  --set structural-ldap-objectclass:inetOrgPerson \
-  --set include-base-dn:ou=People,dc=example,dc=com \
-  --set lookthrough-limit:500 \
-  --set core-schema:urn:pingidentity:schemas:User:1.0
+  --mapping-name userType \
+  --set scim-resource-type-attribute:userType \
+  --set ldap-attribute:employeeType \
+  --set searchable:true
 
 dsconfig create-scim-attribute-mapping \
   --type-name Users \
@@ -86,6 +113,14 @@ dsconfig create-scim-attribute-mapping \
   --set ldap-attribute:labeledURI \
   --set searchable:false
 
+dsconfig create-scim-attribute-mapping \
+    --type-name Users  \
+    --mapping-name groups  \
+    --set correlated-ldap-data-view:correlatedGroups  \
+    --set scim-resource-type-attribute:groups  \
+    --set ldap-attribute:entryUUID  \
+    --set searchable:true
+
 dsconfig set-http-servlet-extension-prop \
   --extension-name SCIM2  \
   --set access-token-validator:pingfederate-validator
@@ -98,3 +133,8 @@ dsconfig set-identity-mapper-prop \
 dsconfig set-root-dn-user-prop \
     --user-name "SCIM2 Servlet"  \
     --add privilege:bypass-acl
+
+dsconfig create-virtual-attribute \
+    --name "Display Entry DN"  \
+    --type entry-dn  \
+    --set enabled:true
