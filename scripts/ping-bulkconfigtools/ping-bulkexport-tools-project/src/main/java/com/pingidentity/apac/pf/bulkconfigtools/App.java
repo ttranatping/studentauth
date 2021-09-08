@@ -478,7 +478,7 @@ public class App {
 			jsonString = jsonString.replace(search, replace);
 
 			if (isApplyEnvFile) {
-				String propertyName = replace.replace("$", "").replace("{", "").replace("}", "");
+				String propertyName = replace.replace("$", "").replace("{", "").replace("}", "").replaceAll("\"","");
 
 				boolean isSetEnvVar = isSetEnvVar(propertyName);
 

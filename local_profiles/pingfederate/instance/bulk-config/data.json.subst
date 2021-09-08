@@ -291,6 +291,24 @@
         {
             "operationType": "SAVE",
             "items": [{
+                "pingOneConnectionId": "${PINGONE_CONNECTION_ID}",
+                "environmentId": "${PINGONE_CONNECTION_ENVIRONMENTID}",
+                "organizationName": "${PINGONE_CONNECTION_ORGANIZATIONNAME}",
+                "credential": "${PINGONE_CONNECTION_CREDENTIAL}",
+                "name": "${PINGONE_CONNECTION_ORGANIZATIONNAME}",
+                "active": true,
+                "credentialId": "${PINGONE_CONNECTION_CREDENTIALID}",
+                "pingOneAuthenticationApiEndpoint": "${PINGONE_CONNECTION_AUTHENDPOINT}",
+                "id": "lPVmy2CTYZ88vlYZksW5Lq",
+                "creationDate": "2021-09-08T01:58:49.231Z",
+                "region": "${PINGONE_CONNECTION_REGION}",
+                "pingOneManagementApiEndpoint": "${PINGONE_CONNECTION_APIENDPOINT}"
+            }],
+            "resourceType": "/pingOneConnections"
+        },
+        {
+            "operationType": "SAVE",
+            "items": [{
                 "hostnamesTags": [{
                     "defaultSource": true,
                     "hostnames": ["pingdirectory:1389"]
