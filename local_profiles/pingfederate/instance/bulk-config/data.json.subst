@@ -388,7 +388,13 @@
         },
         {
             "operationType": "SAVE",
-            "items": [{"synchronizationFrequency": 60}],
+            "items": [{
+                "dataStoreRef": {
+                    "location": "https://localhost:9999/pf-admin-api/v1/dataStores",
+                    "id": ""
+                },
+                "synchronizationFrequency": 60
+            }],
             "resourceType": "/serverSettings/outboundProvisioning"
         },
         {
@@ -936,8 +942,8 @@
                                 "value": "policy.action"
                             },
                             "isTeacher": {
-                                "source": {"type": "TEXT"},
-                                "value": "true"
+                                "source": {"type": "EXPRESSION"},
+                                "value": "#this.get(\"ds.ldap.Subject DN\") != null"
                             },
                             "username": {
                                 "source": {"type": "ADAPTER"},
@@ -2192,7 +2198,7 @@
                                     "fallbackToSuccess": true,
                                     "items": [{
                                         "result": "Teacher",
-                                        "condition": "EQUALS",
+                                        "condition": "EQUALS_CASE_INSENSITIVE",
                                         "expectedValue": "true",
                                         "attributeName": "isTeacher"
                                     }]
