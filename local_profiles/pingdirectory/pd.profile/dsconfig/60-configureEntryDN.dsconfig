@@ -1,0 +1,4 @@
+dsconfig create-virtual-attribute \
+    --name entryDN  \
+    --type entry-dn  \
+    --set enabled:true 
