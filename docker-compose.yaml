@@ -54,6 +54,7 @@ services:
 #      - pingfederate-out:/opt/out
       - ./local_profiles/pingfederate:/opt/in
       - ./licenses/pingfederate.lic:/opt/in/instance/server/default/conf/pingfederate.lic
+      - ./local_profiles/studentauth:/opt/in/instance/server/default/deploy/studentauth
 
   pingdirectory:
     image: pingidentity/pingdirectory:edge

@@ -300,7 +300,7 @@
                 "credentialId": "${PINGONE_CONNECTION_CREDENTIALID}",
                 "pingOneAuthenticationApiEndpoint": "${PINGONE_CONNECTION_AUTHENDPOINT}",
                 "id": "lPVmy2CTYZ88vlYZksW5Lq",
-                "creationDate": "2021-09-09T02:50:22.336Z",
+                "creationDate": "2021-09-09T03:00:57.803Z",
                 "region": "${PINGONE_CONNECTION_REGION}",
                 "pingOneManagementApiEndpoint": "${PINGONE_CONNECTION_APIENDPOINT}"
             }],
@@ -406,13 +406,7 @@
         },
         {
             "operationType": "SAVE",
-            "items": [{
-                "dataStoreRef": {
-                    "location": "https://localhost:9999/pf-admin-api/v1/dataStores",
-                    "id": ""
-                },
-                "synchronizationFrequency": 60
-            }],
+            "items": [{"synchronizationFrequency": 60}],
             "resourceType": "/serverSettings/outboundProvisioning"
         },
         {

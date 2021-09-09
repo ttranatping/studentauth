@@ -1,0 +1,201 @@
+<!--
+ * Copyright (C) 2015-2020 Ping Identity Corporation
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License (GPLv2 only)
+ * or the terms of the GNU Lesser General Public License (LGPLv2.1 only)
+ * as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, see <http://www.gnu.org/licenses>.
+ *
+ -->
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>PingOne for Customers OIDC Sample</title>
+  <link rel="stylesheet" href="https://cdn.shoelace.style/1.0.0-beta24/shoelace.css">
+  <script type="text/javascript"
+          src="https://cdn.polyfill.io/v2/polyfill.js?features=Promise,fetch"></script>
+  <script type="text/javascript"
+          src="https://cdnjs.cloudflare.com/ajax/libs/jsrsasign/8.0.12/jsrsasign-all-min.js"></script>
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js">
+  </script>
+  <style type="text/css">
+    .closeBtn {
+      margin-left: 15px;
+      color: white;
+      font-weight: bold;
+      float: right;
+      font-size: 22px;
+      line-height: 20px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .closeBtn:hover {
+      color: black;
+    }
+
+    .closeBtn:not( :hover ) {
+      color: white;
+    }
+
+  </style>
+</head>
+
+<body>
+<div class="container">
+  <h1>PingOne for Customers OIDC Sample</h1>
+  <br>
+  <div id="status" style="display: block">
+    <span class="closeBtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    <div class="alert" id="alertMessage"></div>
+  </div>
+  <div id="signOffView">
+      <form method="POST" id="form">
+        <div class="input-group">
+          <input type="text" id="classCode"/>
+          <button type="button" id="displayClass">Display Class</button>
+        </div>
+        <div>
+          <h2>Select Student</h2>
+          <div class="input-group" id="studentList">
+          </div>
+        </div>
+        <div>
+          <h2>Select Avatar</h2>
+          <div class="input-group" id="avatarList">
+          </div>
+        </div>
+        <div class="input-group">
+          <input type="hidden" name="actionParam" value="submit"/>
+          <input type="submit" name="Submit"/>
+        </div>
+      </form>
+  </div>
+</div>
+
+<script type="text/javascript">
+
+  var resumePath = getParameterByName("resumePath");
+
+  document.getElementById("form").action = resumePath;
+
+	const permissionAction = async () => {
+
+    var body = {};
+    body.classCode = document.getElementById("classCode").value;
+
+	  const response = await fetch(resumePath, {
+	    method: 'POST',
+	    body: JSON.stringify(body), // string or object
+	    headers: {
+	      'Content-Type': 'application/json',
+	      'X-REQUEST-CODE': 'GET-STUDENTS'
+	    }
+	  });
+
+	  const myJson = await response.json(); //extract JSON from the http response
+
+    displayClass(myJson);
+    displayAvatars(myJson);
+	}
+
+	document.getElementById("displayClass").addEventListener("click", permissionAction);
+
+  var studentAvatars = {};
+
+  function displayClass(classJSON)
+  {
+    studentAvatars = {};
+
+    document.getElementById("studentList").innerHTML = "";
+
+    var parentDiv = document.getElementById("studentList");
+
+    classJSON["students"].forEach(function(student){
+
+      var radioItem = document.createElement("input");
+      radioItem.type = 'radio';
+      radioItem.id = 'selectedStudent_' + student['_dn'];
+      radioItem.name = 'studentDN';
+      radioItem.value = student["_dn"];
+
+      studentAvatars[student["_dn"]] = student["studentAuthAvatarUrl"];
+
+      radioItem.addEventListener('change', function() {
+          selectStudent(this.value);
+      });
+
+      var label = document.createElement('label');
+      label.htmlFor = 'selectedStudent_' + student['_dn'];
+
+      var description = document.createTextNode(student['givenName']);
+      label.appendChild(description);
+
+      var newline = document.createElement('br');
+
+      parentDiv.appendChild(radioItem);
+      parentDiv.appendChild(label);
+      parentDiv.appendChild(newline);
+    });
+  }
+
+  function selectStudent(studentDN)
+  {
+    var studentAvatar = studentAvatars[studentDN];
+    document.getElementById("selectedAvatar_" + studentAvatar).checked = true;
+  }
+
+  function displayAvatars(classJSON)
+  {
+    document.getElementById("avatarList").innerHTML = "";
+
+    var parentDiv = document.getElementById("avatarList");
+
+    classJSON["available-avatars"].forEach(function(avatar){
+
+      var radioItem = document.createElement("input");
+      radioItem.type = 'radio';
+      radioItem.id = 'selectedAvatar_' + avatar['image-url'];
+      radioItem.name = 'avatarSelection';
+      radioItem.value = avatar["image-url"];
+
+      var label = document.createElement('label');
+      label.htmlFor = 'selectedAvatar_' + avatar['image-url'];
+
+      var description = document.createTextNode(avatar['alt-text']);
+      label.appendChild(description);
+
+      var newline = document.createElement('br');
+
+      parentDiv.appendChild(radioItem);
+      parentDiv.appendChild(label);
+      parentDiv.appendChild(newline);
+    });
+
+  }
+
+  function getParameterByName(name, url = window.location.href) {
+      name = name.replace(/[\[\]]/g, '\\$&');
+      var regex = new RegExp('[\\#&]' + name + '(=([^&#]*)|&|#|$)'),
+          results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return '';
+      return decodeURIComponent(results[2].replace(/\+/g, ' '));
+  }
+</script>
+
+</body>
+</html>
