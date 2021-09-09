@@ -1,0 +1,7 @@
+dn: cn=schema
+objectClass: top
+objectClass: ldapSubentry
+objectClass: subschema
+cn: schema
+attributeTypes: ( studentAuthAvatarUrl-OID NAME 'studentAuthAvatarUrl' SINGLE-VALUE USAGE userApplications )
+objectClasses: ( studentAuthAux-OID NAME 'studentAuthAux' AUXILIARY MAY ( studentAuthAvatarUrl ) )

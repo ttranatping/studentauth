@@ -300,7 +300,7 @@
                 "credentialId": "${PINGONE_CONNECTION_CREDENTIALID}",
                 "pingOneAuthenticationApiEndpoint": "${PINGONE_CONNECTION_AUTHENDPOINT}",
                 "id": "lPVmy2CTYZ88vlYZksW5Lq",
-                "creationDate": "2021-09-08T06:59:40.052Z",
+                "creationDate": "2021-09-09T00:07:23.632Z",
                 "region": "${PINGONE_CONNECTION_REGION}",
                 "pingOneManagementApiEndpoint": "${PINGONE_CONNECTION_APIENDPOINT}"
             }],
@@ -406,13 +406,7 @@
         },
         {
             "operationType": "SAVE",
-            "items": [{
-                "dataStoreRef": {
-                    "location": "https://localhost:9999/pf-admin-api/v1/dataStores",
-                    "id": ""
-                },
-                "synchronizationFrequency": 60
-            }],
+            "items": [{"synchronizationFrequency": 60}],
             "resourceType": "/serverSettings/outboundProvisioning"
         },
         {
@@ -1609,7 +1603,7 @@
                         "fields": [
                             {
                                 "name": "REST Endpoint",
-                                "value": "https://localhost:1443/directory/v1/"
+                                "value": "https://pingdirectory:1443/directory/v1/"
                             },
                             {
                                 "name": "Student Container",
@@ -1620,12 +1614,16 @@
                                 "value": "ou=Groups,${USER_BASE_DN}"
                             },
                             {
+                                "name": "AT Subject",
+                                "value": "administrator"
+                            },
+                            {
                                 "name": "AT Client ID",
                                 "value": "studentauthapp"
                             },
                             {
-                                "name": "AT Subject",
-                                "value": "administrator"
+                                "name": "AT Subject Claim",
+                                "value": "Username"
                             },
                             {
                                 "name": "AT Scopes",
@@ -2426,8 +2424,144 @@
                 "failIfNoSelection": false,
                 "authnSelectionTrees": [
                     {
-                        "name": "Default AuthN Policy",
+                        "name": "Teacher AuthN Policy",
                         "enabled": true,
+                        "rootNode": {
+                            "children": [
+                                {"action": {
+                                    "context": "Fail",
+                                    "type": "DONE"
+                                }},
+                                {
+                                    "children": [
+                                        {"action": {
+                                            "context": "Fail",
+                                            "type": "DONE"
+                                        }},
+                                        {"action": {
+                                            "localIdentityRef": {
+                                                "location": "https://localhost:9999/pf-admin-api/v1/localIdentity/identityProfiles/RBSQIwi5KWYN9ZGK",
+                                                "id": "RBSQIwi5KWYN9ZGK"
+                                            },
+                                            "inboundMapping": {
+                                                "attributeContractFulfillment": {"pf.local.identity.unique.id": {
+                                                    "source": {
+                                                        "id": "HTMLFormPD",
+                                                        "type": "ADAPTER"
+                                                    },
+                                                    "value": "username"
+                                                }},
+                                                "attributeSources": [],
+                                                "issuanceCriteria": {"conditionalCriteria": []}
+                                            },
+                                            "context": "Success",
+                                            "outboundAttributeMapping": {
+                                                "attributeContractFulfillment": {
+                                                    "mail": {
+                                                        "source": {
+                                                            "id": "RBSQIwi5KWYN9ZGK",
+                                                            "type": "LOCAL_IDENTITY_PROFILE"
+                                                        },
+                                                        "value": "mail"
+                                                    },
+                                                    "subject": {
+                                                        "source": {
+                                                            "id": "RBSQIwi5KWYN9ZGK",
+                                                            "type": "LOCAL_IDENTITY_PROFILE"
+                                                        },
+                                                        "value": "entryUUID"
+                                                    }
+                                                },
+                                                "attributeSources": [],
+                                                "issuanceCriteria": {"conditionalCriteria": []}
+                                            },
+                                            "type": "LOCAL_IDENTITY_MAPPING"
+                                        }}
+                                    ],
+                                    "action": {
+                                        "authenticationSource": {
+                                            "type": "IDP_ADAPTER",
+                                            "sourceRef": {
+                                                "location": "https://localhost:9999/pf-admin-api/v1/idp/adapters/studentAuthAdapter",
+                                                "id": "studentAuthAdapter"
+                                            }
+                                        },
+                                        "context": "Teacher",
+                                        "inputUserIdMapping": {
+                                            "source": {
+                                                "id": "HTMLFormPD",
+                                                "type": "ADAPTER"
+                                            },
+                                            "value": "teacherDN"
+                                        },
+                                        "userIdAuthenticated": true,
+                                        "type": "AUTHN_SOURCE"
+                                    }
+                                },
+                                {"action": {
+                                    "localIdentityRef": {
+                                        "location": "https://localhost:9999/pf-admin-api/v1/localIdentity/identityProfiles/RBSQIwi5KWYN9ZGK",
+                                        "id": "RBSQIwi5KWYN9ZGK"
+                                    },
+                                    "inboundMapping": {
+                                        "attributeContractFulfillment": {"pf.local.identity.unique.id": {
+                                            "source": {
+                                                "id": "HTMLFormPD",
+                                                "type": "ADAPTER"
+                                            },
+                                            "value": "username"
+                                        }},
+                                        "attributeSources": [],
+                                        "issuanceCriteria": {"conditionalCriteria": []}
+                                    },
+                                    "context": "Success",
+                                    "outboundAttributeMapping": {
+                                        "attributeContractFulfillment": {
+                                            "mail": {
+                                                "source": {
+                                                    "id": "RBSQIwi5KWYN9ZGK",
+                                                    "type": "LOCAL_IDENTITY_PROFILE"
+                                                },
+                                                "value": "mail"
+                                            },
+                                            "subject": {
+                                                "source": {
+                                                    "id": "RBSQIwi5KWYN9ZGK",
+                                                    "type": "LOCAL_IDENTITY_PROFILE"
+                                                },
+                                                "value": "entryUUID"
+                                            }
+                                        },
+                                        "attributeSources": [],
+                                        "issuanceCriteria": {"conditionalCriteria": []}
+                                    },
+                                    "type": "LOCAL_IDENTITY_MAPPING"
+                                }}
+                            ],
+                            "action": {
+                                "authenticationSource": {
+                                    "type": "IDP_ADAPTER",
+                                    "sourceRef": {
+                                        "location": "https://localhost:9999/pf-admin-api/v1/idp/adapters/HTMLFormPD",
+                                        "id": "HTMLFormPD"
+                                    }
+                                },
+                                "attributeRules": {
+                                    "fallbackToSuccess": true,
+                                    "items": [{
+                                        "result": "Teacher",
+                                        "condition": "EQUALS_CASE_INSENSITIVE",
+                                        "expectedValue": "true",
+                                        "attributeName": "isTeacher"
+                                    }]
+                                },
+                                "type": "AUTHN_SOURCE"
+                            }
+                        }
+                    },
+                    {
+                        "name": "Default AuthN Policy",
+                        "enabled": false,
                         "rootNode": {
                             "children": [
                                 {"action": {
@@ -2601,142 +2735,6 @@
                                         "location": "https://localhost:9999/pf-admin-api/v1/idp/adapters/HTMLFormPD",
                                         "id": "HTMLFormPD"
                                     }
-                                },
-                                "type": "AUTHN_SOURCE"
-                            }
-                        }
-                    },
-                    {
-                        "name": "Teacher AuthN Policy",
-                        "enabled": false,
-                        "rootNode": {
-                            "children": [
-                                {"action": {
-                                    "context": "Fail",
-                                    "type": "DONE"
-                                }},
-                                {
-                                    "children": [
-                                        {"action": {
-                                            "context": "Fail",
-                                            "type": "DONE"
-                                        }},
-                                        {"action": {
-                                            "localIdentityRef": {
-                                                "location": "https://localhost:9999/pf-admin-api/v1/localIdentity/identityProfiles/RBSQIwi5KWYN9ZGK",
-                                                "id": "RBSQIwi5KWYN9ZGK"
-                                            },
-                                            "inboundMapping": {
-                                                "attributeContractFulfillment": {"pf.local.identity.unique.id": {
-                                                    "source": {
-                                                        "id": "HTMLFormPD",
-                                                        "type": "ADAPTER"
-                                                    },
-                                                    "value": "username"
-                                                }},
-                                                "attributeSources": [],
-                                                "issuanceCriteria": {"conditionalCriteria": []}
-                                            },
-                                            "context": "Success",
-                                            "outboundAttributeMapping": {
-                                                "attributeContractFulfillment": {
-                                                    "mail": {
-                                                        "source": {
-                                                            "id": "RBSQIwi5KWYN9ZGK",
-                                                            "type": "LOCAL_IDENTITY_PROFILE"
-                                                        },
-                                                        "value": "mail"
-                                                    },
-                                                    "subject": {
-                                                        "source": {
-                                                            "id": "RBSQIwi5KWYN9ZGK",
-                                                            "type": "LOCAL_IDENTITY_PROFILE"
-                                                        },
-                                                        "value": "entryUUID"
-                                                    }
-                                                },
-                                                "attributeSources": [],
-                                                "issuanceCriteria": {"conditionalCriteria": []}
-                                            },
-                                            "type": "LOCAL_IDENTITY_MAPPING"
-                                        }}
-                                    ],
-                                    "action": {
-                                        "authenticationSource": {
-                                            "type": "IDP_ADAPTER",
-                                            "sourceRef": {
-                                                "location": "https://localhost:9999/pf-admin-api/v1/idp/adapters/studentAuthAdapter",
-                                                "id": "studentAuthAdapter"
-                                            }
-                                        },
-                                        "context": "Teacher",
-                                        "inputUserIdMapping": {
-                                            "source": {
-                                                "id": "HTMLFormPD",
-                                                "type": "ADAPTER"
-                                            },
-                                            "value": "teacherDN"
-                                        },
-                                        "userIdAuthenticated": true,
-                                        "type": "AUTHN_SOURCE"
-                                    }
-                                },
-                                {"action": {
-                                    "localIdentityRef": {
-                                        "location": "https://localhost:9999/pf-admin-api/v1/localIdentity/identityProfiles/RBSQIwi5KWYN9ZGK",
-                                        "id": "RBSQIwi5KWYN9ZGK"
-                                    },
-                                    "inboundMapping": {
-                                        "attributeContractFulfillment": {"pf.local.identity.unique.id": {
-                                            "source": {
-                                                "id": "HTMLFormPD",
-                                                "type": "ADAPTER"
-                                            },
-                                            "value": "username"
-                                        }},
-                                        "attributeSources": [],
-                                        "issuanceCriteria": {"conditionalCriteria": []}
-                                    },
-                                    "context": "Success",
-                                    "outboundAttributeMapping": {
-                                        "attributeContractFulfillment": {
-                                            "mail": {
-                                                "source": {
-                                                    "id": "RBSQIwi5KWYN9ZGK",
-                                                    "type": "LOCAL_IDENTITY_PROFILE"
-                                                },
-                                                "value": "mail"
-                                            },
-                                            "subject": {
-                                                "source": {
-                                                    "id": "RBSQIwi5KWYN9ZGK",
-                                                    "type": "LOCAL_IDENTITY_PROFILE"
-                                                },
-                                                "value": "entryUUID"
-                                            }
-                                        },
-                                        "attributeSources": [],
-                                        "issuanceCriteria": {"conditionalCriteria": []}
-                                    },
-                                    "type": "LOCAL_IDENTITY_MAPPING"
-                                }}
-                            ],
-                            "action": {
-                                "authenticationSource": {
-                                    "type": "IDP_ADAPTER",
-                                    "sourceRef": {
-                                        "location": "https://localhost:9999/pf-admin-api/v1/idp/adapters/HTMLFormPD",
-                                        "id": "HTMLFormPD"
-                                    }
-                                },
-                                "attributeRules": {
-                                    "fallbackToSuccess": true,
-                                    "items": [{
-                                        "result": "Teacher",
-                                        "condition": "EQUALS_CASE_INSENSITIVE",
-                                        "expectedValue": "true",
-                                        "attributeName": "isTeacher"
-                                    }]
                                 },
                                 "type": "AUTHN_SOURCE"
                             }

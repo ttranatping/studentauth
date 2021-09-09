@@ -81,7 +81,7 @@ services:
     volumes:
       - pingdirectory-out:/opt/out
       - ./local_profiles/pingdirectory:/opt/in
-      - /opt/in/pd.profile/server-root/pre-setup/PingDirectory.lic
+      - ./licenses/PingDirectory.lic:/opt/in/pd.profile/server-root/pre-setup/PingDirectory.lic
 
   pingdataconsole:
     image: pingidentity/pingdataconsole:edge
