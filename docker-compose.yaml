@@ -97,6 +97,7 @@ services:
     tmpfs: /run/secrets
     environment:
       - PD_ENGINE_PUBLIC_PORT=1443
+      - PF_ENGINE_PUBLIC_PORT=3000
 #      - SERVER_PROFILE_URL=https://github.com/pingidentity/pingidentity-server-profiles.git
 #      - SERVER_PROFILE_PATH=baseline/pingdelegator
     env_file:
@@ -107,6 +108,17 @@ services:
       - pingnet
     volumes:
       - ./local_profiles/pingdelegator:/opt/in
+
+  httpd:
+    image: httpd:latest
+    ports:
+      - "3000:443"
+      - "443:443"
+    networks:
+      - pingnet
+    volumes:
+      - ./local_profiles/studentauth/html:/usr/local/apache2/htdocs/studentauth
+      - ./local_profiles/studentauth/conf:/usr/local/apache2/conf
 
 networks:
     pingnet:

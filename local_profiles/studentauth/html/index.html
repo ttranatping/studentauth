@@ -22,7 +22,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  <title>PingOne for Customers OIDC Sample</title>
+  <title>Student Auth</title>
   <link rel="stylesheet" href="https://cdn.shoelace.style/1.0.0-beta24/shoelace.css">
   <script type="text/javascript"
           src="https://cdn.polyfill.io/v2/polyfill.js?features=Promise,fetch"></script>
@@ -31,40 +31,20 @@
 
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js">
   </script>
-  <style type="text/css">
-    .closeBtn {
-      margin-left: 15px;
-      color: white;
-      font-weight: bold;
-      float: right;
-      font-size: 22px;
-      line-height: 20px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    .closeBtn:hover {
-      color: black;
-    }
-
-    .closeBtn:not( :hover ) {
-      color: white;
-    }
-
-  </style>
 </head>
 
 <body>
 <div class="container">
-  <h1>PingOne for Customers OIDC Sample</h1>
+  <h1>Student Auth</h1>
   <br>
   <div id="status" style="display: block">
     <span class="closeBtn" onclick="this.parentElement.style.display='none';">&times;</span>
     <div class="alert" id="alertMessage"></div>
   </div>
-  <div id="signOffView">
+  <div>
       <form method="POST" id="form">
         <div class="input-group">
+          <h2>Select Class</h2>
           <input type="text" id="classCode"/>
           <button type="button" id="displayClass">Display Class</button>
         </div>

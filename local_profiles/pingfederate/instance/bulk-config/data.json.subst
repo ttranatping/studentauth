@@ -300,7 +300,7 @@
                 "credentialId": "${PINGONE_CONNECTION_CREDENTIALID}",
                 "pingOneAuthenticationApiEndpoint": "${PINGONE_CONNECTION_AUTHENDPOINT}",
                 "id": "lPVmy2CTYZ88vlYZksW5Lq",
-                "creationDate": "2021-09-09T03:00:57.803Z",
+                "creationDate": "2021-09-10T01:48:36.665Z",
                 "region": "${PINGONE_CONNECTION_REGION}",
                 "pingOneManagementApiEndpoint": "${PINGONE_CONNECTION_APIENDPOINT}"
             }],
@@ -353,7 +353,7 @@
                     "saml2EntityId": "https://localhost:9031",
                     "saml1xIssuerId": "localhost:default:entityId",
                     "wsfedRealm": "",
-                    "baseUrl": "https://localhost:9031",
+                    "baseUrl": "https://localhost:3000",
                     "saml1xSourceId": ""
                 },
                 "contactInfo": {},
@@ -406,7 +406,13 @@
         },
         {
             "operationType": "SAVE",
-            "items": [{"synchronizationFrequency": 60}],
+            "items": [{
+                "dataStoreRef": {
+                    "location": "https://localhost:9999/pf-admin-api/v1/dataStores",
+                    "id": ""
+                },
+                "synchronizationFrequency": 60
+            }],
             "resourceType": "/serverSettings/outboundProvisioning"
         },
         {
@@ -457,7 +463,13 @@
         },
         {
             "operationType": "SAVE",
-            "items": [{"proxyTerminatesHttpsConns": false}],
+            "items": [{
+                "forwardedIpAddressHeaderIndex": "LAST",
+                "forwardedHostHeaderName": "X-Forwarded-Host",
+                "forwardedIpAddressHeaderName": "X-FORWARDED-FOR",
+                "forwardedHostHeaderIndex": "LAST",
+                "proxyTerminatesHttpsConns": true
+            }],
             "resourceType": "/incomingProxySettings"
         },
         {
@@ -1677,7 +1689,7 @@
                             },
                             {
                                 "name": "Presentation URL",
-                                "value": "/studentauth"
+                                "value": "/studentauth/"
                             },
                             {
                                 "name": "Ignore SSL",

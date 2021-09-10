@@ -1,4 +1,4 @@
 dsconfig create-virtual-attribute \
-    --name entryDN  \
+    --name entryDNVA  \
     --type entry-dn  \
-    --set enabled:true 
+    --set enabled:true
