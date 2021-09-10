@@ -1627,11 +1627,11 @@
                                     "fields": [
                                         {
                                             "name": "Alt Text",
-                                            "value": "Skye"
+                                            "value": "0001"
                                         },
                                         {
                                             "name": "Img Url",
-                                            "value": "/assets/images/avatars/skye.png"
+                                            "value": "/assets/images/avatars/0001.png"
                                         }
                                     ]
                                 },
@@ -1640,11 +1640,115 @@
                                     "fields": [
                                         {
                                             "name": "Alt Text",
-                                            "value": "Rubble"
+                                            "value": "0002"
                                         },
                                         {
                                             "name": "Img Url",
-                                            "value": "/assets/images/avatars/rubble.png"
+                                            "value": "/assets/images/avatars/0002.png"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "defaultRow": false,
+                                    "fields": [
+                                        {
+                                            "name": "Alt Text",
+                                            "value": "0003"
+                                        },
+                                        {
+                                            "name": "Img Url",
+                                            "value": "/assets/images/avatars/0003.png"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "defaultRow": false,
+                                    "fields": [
+                                        {
+                                            "name": "Alt Text",
+                                            "value": "0004"
+                                        },
+                                        {
+                                            "name": "Img Url",
+                                            "value": "/assets/images/avatars/0004.png"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "defaultRow": false,
+                                    "fields": [
+                                        {
+                                            "name": "Alt Text",
+                                            "value": "0005"
+                                        },
+                                        {
+                                            "name": "Img Url",
+                                            "value": "/assets/images/avatars/0005.png"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "defaultRow": false,
+                                    "fields": [
+                                        {
+                                            "name": "Alt Text",
+                                            "value": "0006"
+                                        },
+                                        {
+                                            "name": "Img Url",
+                                            "value": "/assets/images/avatars/0006.png"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "defaultRow": false,
+                                    "fields": [
+                                        {
+                                            "name": "Alt Text",
+                                            "value": "0007"
+                                        },
+                                        {
+                                            "name": "Img Url",
+                                            "value": "/assets/images/avatars/0007.png"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "defaultRow": false,
+                                    "fields": [
+                                        {
+                                            "name": "Alt Text",
+                                            "value": "0008"
+                                        },
+                                        {
+                                            "name": "Img Url",
+                                            "value": "/assets/images/avatars/0008.png"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "defaultRow": false,
+                                    "fields": [
+                                        {
+                                            "name": "Alt Text",
+                                            "value": "0009"
+                                        },
+                                        {
+                                            "name": "Img Url",
+                                            "value": "/assets/images/avatars/0009.png"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "defaultRow": false,
+                                    "fields": [
+                                        {
+                                            "name": "Alt Text",
+                                            "value": "0010"
+                                        },
+                                        {
+                                            "name": "Img Url",
+                                            "value": "/assets/images/avatars/0010.png"
                                         }
                                     ]
                                 }
